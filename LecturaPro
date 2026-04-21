@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3294385200593965" crossorigin="anonymous"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LecturaPro | Test de Velocidad Lectora Gratis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Outfit:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #6366f1; --bg: #f8fafc; --text: #1e293b; }
+        * { box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background: var(--bg); color: var(--text); margin: 0; padding: 20px; text-align: center; }
+
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        h1 { font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-bottom: 10px; }
+        .description { color: #64748b; margin-bottom: 30px; }
+
+        #text-display { 
+            display: none; 
+            font-family: 'Merriweather', serif; 
+            font-size: 1.2rem; 
+            line-height: 1.8; 
+            text-align: left; 
+            background: #f1f5f9; 
+            padding: 30px; 
+            border-radius: 20px; 
+            margin: 20px 0;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn { 
+            background: var(--primary); color: white; border: none; padding: 18px 40px; 
+            border-radius: 15px; font-size: 1.2rem; font-weight: bold; cursor: pointer; 
+            transition: 0.3s; width: 100%; max-width: 300px;
+        }
+        .btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        .results { display: none; margin-top: 30px; animation: pop 0.5s ease; }
+        @keyframes pop { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        .ppm-value { font-size: 5rem; font-weight: 900; color: var(--primary); margin: 0; }
+        
+        footer { margin-top: 50px; font-size: 0.8rem; color: #94a3b8; }
+        footer a { color: var(--primary); text-decoration: none; }
+
+        #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 450px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); padding: 20px; z-index: 9999; display: none; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>LECTURAPRO<span>.es</span></h1>
+    <p class="description">Descubre cuántas palabras lees por minuto con el test de <b>Eloy Murillo</b>.</p>
+
+    <div id="start-screen">
+        <p>Prepárate, el texto aparecerá al pulsar el botón. Léelo a tu ritmo normal.</p>
+        <button class="btn" onclick="startTest()">¡EMPEZAR TEST!</button>
+    </div>
+
+    <div id="text-display">
+        </div>
+
+    <button id="end-btn" class="btn" style="display:none;" onclick="endTest()">HE TERMINADO DE LEER</button>
+
+    <div id="results" class="results">
+        <h2>Tu resultado:</h2>
+        <p class="ppm-value" id="ppm-res">0</p>
+        <p><b>Palabras Por Minuto (PPM)</b></p>
+        <p id="feedback-text" style="font-size: 1.1rem; color: #475569; margin: 20px 0;"></p>
+        <button class="btn" onclick="location.reload()">REPETIR TEST</button>
+        
+        <div style="margin-top: 30px; padding: 20px; border: 2px dashed #cbd5e1; border-radius: 20px;">
+            <p>🎁 <b>¿Quieres leer más rápido?</b> Prueba este curso de lectura ágil en Amazon:</p>
+            <a href="https://www.amazon.es/s?k=lectura+rapida&tag=emurillog10-21" target="_blank" style="color:var(--primary); font-weight:bold;">Ver Libros Recomendados →</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>LecturaPro.es | Creado por Eloy Murillo Granado</p>
+    <p><a href="#" onclick="alert('Aviso Legal: Propiedad de Eloy Murillo. Datos procesados localmente.')">Legal</a> | <a href="#" onclick="alert('Privacidad: No guardamos tus textos ni resultados.')">Privacidad</a></p>
+</footer>
+
+<div id="cookie-banner">
+    <p style="font-size: 13px;">Usamos cookies para analítica y anuncios. ¿Aceptas? <button onclick="acceptCookies()" style="background:none; border:none; color:var(--primary); cursor:pointer; font-weight:bold;">Aceptar</button></p>
+</div>
+
+<script>
+    const textoTest = "El éxito en la vida no se mide por lo que logras, sino por los obstáculos que superas. La lectura es para la mente lo que el ejercicio físico es para el cuerpo. Cuando leemos, no solo absorbemos información, sino que entrenamos nuestra capacidad de enfoque, nuestra empatía y nuestra imaginación. En el mundo digital actual, la capacidad de concentrarse en un texto largo es una ventaja competitiva. Quien lee rápido y comprende bien, procesa la información del mundo antes que los demás. Sigue practicando cada día y verás cómo tu capacidad de análisis mejora de forma increíble.";
+    const totalPalabras = textoTest.split(" ").length;
+    let startTime;
+
+    function startTest() {
+        document.getElementById('start-screen').style.display = 'none';
+        const display = document.getElementById('text-display');
+        display.innerText = textoTest;
+        display.style.display = 'block';
+        document.getElementById('end-btn').style.display = 'inline-block';
+        startTime = new Date().getTime();
+    }
+
+    function endTest() {
+        const endTime = new Date().getTime();
+        const durationInSeconds = (endTime - startTime) / 1000;
+        const durationInMinutes = durationInSeconds / 60;
+        const ppm = Math.round(totalPalabras / durationInMinutes);
+
+        document.getElementById('text-display').style.display = 'none';
+        document.getElementById('end-btn').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        document.getElementById('ppm-res').innerText = ppm;
+
+        let feedback = "";
+        if(ppm < 150) feedback = "Lectura lenta. ¡Necesitas practicar más!";
+        else if(ppm < 250) feedback = "Velocidad media. ¡Estás en el promedio nacional!";
+        else if(ppm < 400) feedback = "¡Lectura fluida! Eres un lector muy eficiente.";
+        else feedback = "🚀 ¡Nivel Experto! Lees a una velocidad asombrosa.";
+        
+        document.getElementById('feedback-text').innerText = feedback;
+    }
+
+    // Lógica Cookies
+    if(!localStorage.getItem('lectura_cookies')) {
+        document.getElementById('cookie-banner').style.display = 'block';
+    }
+    function acceptCookies() {
+        localStorage.setItem('lectura_cookies', 'true');
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
+</script>
+</body>
+</html>
