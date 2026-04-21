@@ -4,18 +4,22 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3294385200593965" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LecturaPro | Test Aleatorio de Velocidad y Comprensión</title>
+    <title>LecturaPro | Test de Velocidad y Comprensión Lectoras</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #4f46e5; --bg: #f8fafc; --text-main: #0f172a; --card-bg: #ffffff; --accent: #10b981; --border: #e2e8f0; --nominpro: #0052ff; }
         @media (prefers-color-scheme: dark) { :root { --bg: #0f172a; --text-main: #f8fafc; --card-bg: #1e293b; --primary: #6366f1; --border: #334155; } }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text-main); display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
         
-        .header-title { text-align: center; margin-bottom: 20px; margin-top: 10px; }
-        .header-title h1 { font-size: 2.8rem; color: var(--primary); letter-spacing: -1px; }
+        /* HEADER MEJORADO */
+        .nav-header { width: 100%; max-width: 800px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .back-to-finance { text-decoration: none; color: var(--nominpro); font-weight: 800; font-size: 0.9rem; border: 2px solid var(--nominpro); padding: 8px 15px; border-radius: 50px; transition: 0.3s; background: white; }
+        .back-to-finance:hover { background: var(--nominpro); color: white; }
+
+        .header-title { text-align: center; margin-bottom: 20px; }
+        .header-title h1 { font-size: 2.8rem; color: var(--primary); letter-spacing: -1px; margin-bottom: 5px; }
         
-        /* BLOQUE DE ANUNCIOS */
         .ad-slot { max-width: 800px; width: 100%; min-height: 90px; margin-bottom: 20px; background: rgba(0,0,0,0.02); border: 1px dashed var(--border); border-radius: 16px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
 
         .container { background: var(--card-bg); max-width: 800px; width: 100%; padding: 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); text-align: center; border: 1px solid var(--border); position: relative; }
@@ -24,36 +28,41 @@
         .screen.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .btn { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 1.1rem; width: 100%; max-width: 300px; margin: 10px auto; display: block; }
+        .btn { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 1.1rem; width: 100%; max-width: 300px; margin: 10px auto; display: block; text-decoration: none; }
         .btn:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2); }
         .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
         .btn-success { background: var(--accent); max-width: 100%; }
         
-        .back-link { display: inline-block; margin-top: 15px; color: #64748b; text-decoration: underline; cursor: pointer; font-size: 0.9rem; }
-        .back-link:hover { color: var(--primary); }
-
         .reading-area { font-family: 'Lora', serif; font-size: 1.3rem; text-align: left; background: var(--bg); padding: 30px; border-radius: 16px; margin: 20px 0; border-left: 5px solid var(--primary); white-space: pre-wrap; line-height: 1.8; }
         .option-label { display: block; background: var(--bg); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; text-align: left; border: 1px solid var(--border); transition: 0.2s; }
         .option-label:hover { border-color: var(--primary); background: rgba(79, 70, 229, 0.05); }
+
+        /* RECORD PERSONAL */
+        .record-badge { background: #fef3c7; color: #92400e; padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: bold; margin-bottom: 20px; display: inline-block; border: 1px solid #fcd34d; }
+
+        /* PROMO AMAZON (Igual que en NominPro para coherencia) */
+        .promo-amazon { margin: 30px 0; text-align: center; background: #fffbe6; padding: 20px; border-radius: 20px; border: 1px solid #ffe58f; font-size: 0.9rem; }
+        .promo-amazon a { color: #856404; font-weight: bold; text-decoration: underline; }
         
         /* CROSS-PROMO NOMINPRO */
         .promo-card { margin-top: 30px; padding: 25px; border-radius: 20px; background: linear-gradient(145deg, #f4f7ff, #ffffff); border: 2px solid var(--nominpro); text-align: center; cursor: pointer; transition: 0.3s; }
         .promo-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 82, 255, 0.15); }
-        .promo-card h3 { color: var(--nominpro); margin-bottom: 5px; font-size: 1.3rem; }
-        .promo-card p { font-size: 0.9rem; color: #555; margin-bottom: 15px; }
-        .promo-btn { background: var(--nominpro); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; }
-
-        /* LEGAL Y COOKIES */
+        
         #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; background: var(--card-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 16px; display: none; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; padding: 20px; overflow-y: auto; }
         .modal-content { background: var(--card-bg); max-width: 600px; margin: 40px auto; padding: 30px; border-radius: 20px; position: relative; text-align: left; }
         .close-btn { position: absolute; right: 20px; top: 20px; font-size: 1.5rem; cursor: pointer; color: #999; font-weight: bold; }
         
-        footer { margin-top: 40px; font-size: 0.85rem; opacity: 0.7; text-align: center; padding-bottom: 20px; }
-        footer a { margin: 0 10px; cursor: pointer; text-decoration: underline; color: var(--text-main); }
+        footer { margin-top: 40px; font-size: 0.85rem; opacity: 0.7; text-align: center; padding-bottom: 20px; color: var(--text-main); }
+        footer a { margin: 0 10px; cursor: pointer; text-decoration: underline; color: inherit; }
     </style>
 </head>
 <body>
+
+    <div class="nav-header">
+        <div style="font-weight: 900; color: var(--primary);">LECTURAPRO</div>
+        <a href="https://nominpro.es" class="back-to-finance">👔 Ir a NominPro.es</a>
+    </div>
 
     <div class="header-title">
         <h1>LecturaPro</h1>
@@ -64,7 +73,7 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-3294385200593965"
-             data-ad-slot="BLOQUE_TESTLECTURA"
+             data-ad-slot="5821034338" 
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -72,6 +81,7 @@
 
     <div class="container">
         <div id="screen-start" class="screen active">
+            <div id="personal-record" class="record-badge" style="display:none;">🏆 Tu récord actual: <span id="best-wpm">0</span> WPM</div>
             <h2 style="margin-bottom: 10px;">¿Qué quieres leer hoy?</h2>
             <p style="margin-bottom:30px; color:#64748b;">Elige tu nivel. Cada clic genera un texto distinto.</p>
             <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
@@ -79,104 +89,80 @@
                 <button class="btn btn-outline" onclick="initTest('medio')">🟡 Nivel Medio</button>
                 <button class="btn btn-outline" onclick="initTest('dificil')">🔴 Nivel Difícil</button>
             </div>
+
+            <div class="promo-amazon">
+                <p>📚 <b>Tip de lectura:</b> Leer rápido es inútil si no comprendes. <a href="https://www.amazon.es/dp/8441436440?tag=emurillog10-21" target="_blank">Libro recomendado por Eloy →</a></p>
+            </div>
         </div>
 
         <div id="screen-reading" class="screen">
-            <p style="font-size: 0.9rem; color: #64748b; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">El cronómetro está en marcha ⏱️</p>
+            <p style="font-size: 0.9rem; color: #64748b; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Cronómetro activo ⏱️</p>
             <div id="text-content" class="reading-area"></div>
-            <button class="btn btn-success" onclick="finishReading()">¡HE TERMINADO DE LEER!</button>
-            <a class="back-link" onclick="switchScreen('screen-start')">← Cancelar y volver al menú</a>
+            <button class="btn btn-success" onclick="finishReading()">¡HE TERMINADO!</button>
+            <a style="display:block; margin-top:15px; color:#64748b; cursor:pointer;" onclick="switchScreen('screen-start')">← Cancelar</a>
         </div>
 
         <div id="screen-quiz" class="screen">
-            <h2 style="margin-bottom:20px;">Comprobación de comprensión</h2>
-            <p style="margin-bottom:20px; color:#64748b;">Demuestra que no solo has leído rápido, sino que lo has entendido.</p>
+            <h2 style="margin-bottom:20px;">Comprensión Lectoras</h2>
+            <p style="margin-bottom:20px; color:#64748b;">¿Qué recuerdas del texto?</p>
             <div id="quiz-content" style="text-align: left;"></div>
-            <button class="btn" style="max-width: 100%; margin-top:20px;" onclick="calculateResults()">VER MIS RESULTADOS</button>
+            <button class="btn" style="max-width: 100%; margin-top:20px;" onclick="calculateResults()">RESULTADOS</button>
         </div>
 
         <div id="screen-results" class="screen">
-            <h2 id="rank-title" style="font-size:2rem; margin-bottom:20px;">-</h2>
+            <h2 id="rank-title" style="font-size:1.8rem; margin-bottom:20px;">-</h2>
             <div style="display:flex; gap:20px; justify-content:center; margin-bottom:20px; flex-wrap: wrap;">
                 <div style="background: var(--bg); padding: 20px; border-radius: 16px; border: 1px solid var(--border); flex: 1; min-width: 150px;">
-                    <p style="text-transform: uppercase; font-size: 0.8rem; font-weight: bold; color: #64748b;">Velocidad</p>
-                    <h3 id="res-wpm" style="font-size:3.5rem; color:var(--primary); line-height: 1;">0</h3>
-                    <p>Palabras/Minuto</p>
+                    <p style="text-transform: uppercase; font-size: 0.7rem; font-weight: bold; color: #64748b;">Velocidad</p>
+                    <h3 id="res-wpm" style="font-size:3rem; color:var(--primary); line-height: 1;">0</h3>
+                    <p style="font-size: 0.8rem;">Palabras/Min</p>
                 </div>
                 <div style="background: var(--bg); padding: 20px; border-radius: 16px; border: 1px solid var(--border); flex: 1; min-width: 150px;">
-                    <p style="text-transform: uppercase; font-size: 0.8rem; font-weight: bold; color: #64748b;">Comprensión</p>
-                    <h3 id="res-score" style="font-size:3.5rem; color:var(--accent); line-height: 1;">0%</h3>
-                    <p>Aciertos</p>
+                    <p style="text-transform: uppercase; font-size: 0.7rem; font-weight: bold; color: #64748b;">Acierto</p>
+                    <h3 id="res-score" style="font-size:3rem; color:var(--accent); line-height: 1;">0%</h3>
+                    <p style="font-size: 0.8rem;">Comprensión</p>
                 </div>
             </div>
             
-            <button class="btn btn-outline" style="max-width: 100%;" onclick="location.reload()">🔄 Intentar con otro texto</button>
+            <button class="btn" style="max-width: 100%;" onclick="location.reload()">🔄 Nuevo Test</button>
 
             <div class="promo-card" onclick="window.open('https://nominpro.es', '_blank')">
-                <h3>💼 Domina también tu dinero</h3>
-                <p>Calcula tu sueldo neto, hipoteca y gastos hormiga de forma fácil.</p>
-                <span class="promo-btn">Ir a NominPro.es →</span>
+                <h3 style="color:var(--nominpro); margin-bottom:5px;">💼 Gestiona tu Dinero</h3>
+                <p style="font-size: 0.85rem; color:#666;">Calcula tu sueldo, hipoteca y ahorros en NominPro.</p>
+                <div style="margin-top:10px; font-weight:bold; color:var(--nominpro);">Ir a NominPro.es →</div>
             </div>
         </div>
     </div>
 
     <div id="cookie-banner">
-        <p style="margin-bottom: 15px; font-size: 0.95rem;">🍪 Utilizamos cookies propias y de terceros (Google AdSense) para personalizar el contenido y analizar el tráfico de la web. <a onclick="showModal('modal-cookies')" style="color:var(--primary); text-decoration:underline; cursor:pointer;">Saber más</a>.</p>
-        <button class="btn" style="padding:10px 20px; font-size:1rem; width: auto; margin: 0;" onclick="acceptCookies()">Aceptar todo</button>
+        <p style="margin-bottom: 15px; font-size: 0.9rem;">🍪 Usamos cookies para personalizar anuncios y analizar el tráfico. <a onclick="showModal('modal-cookies')" style="color:var(--primary); cursor:pointer;">Leer más</a>.</p>
+        <button class="btn" style="padding:10px 20px; font-size:0.9rem; width: auto; margin: 0;" onclick="acceptCookies()">Aceptar</button>
     </div>
 
     <footer>
-        <p style="margin-bottom: 10px;">© 2026 TestLectura.es | Todos los derechos reservados.</p>
+        <p style="margin-bottom: 10px;">© 2026 <b>TestLectura.es</b> | Por Eloy Murillo</p>
         <a onclick="showModal('modal-aviso')">Aviso Legal</a> | 
         <a onclick="showModal('modal-privacidad')">Privacidad</a> | 
         <a onclick="showModal('modal-cookies')">Cookies</a>
     </footer>
 
-    <div id="modal-aviso" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 style="color: var(--primary); margin-bottom: 15px;">Aviso Legal</h2>
-            <p><strong>Titular:</strong> Eloy Murillo Granado<br>
-            <strong>Contacto:</strong> emurillogranado@gmail.com</p>
-            <p style="margin-top: 15px;">El acceso y uso de este sitio web es gratuito y su contenido es puramente informativo y de entretenimiento.</p>
-        </div>
-    </div>
-
-    <div id="modal-privacidad" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 style="color: var(--primary); margin-bottom: 15px;">Política de Privacidad</h2>
-            <p>En TestLectura.es respetamos tu privacidad. <strong>No almacenamos datos personales</strong> de los usuarios en nuestros servidores. Los cálculos de velocidad y comprensión lectora se procesan localmente en tu navegador y se borran al cerrar la pestaña.</p>
-            <p style="margin-top: 15px;"><strong>Publicidad:</strong> Utilizamos Google AdSense para mostrar anuncios. Google y sus socios utilizan cookies para mostrar anuncios basados en tus visitas anteriores a este y otros sitios web.</p>
-        </div>
-    </div>
-
-    <div id="modal-cookies" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 style="color: var(--primary); margin-bottom: 15px;">Política de Cookies</h2>
-            <p>Este sitio web utiliza cookies técnicas necesarias para el funcionamiento del banner de aceptación, y cookies de terceros administradas por Google AdSense para la personalización de anuncios y análisis de tráfico.</p>
-            <p style="margin-top: 15px;">Puedes desactivar las cookies en cualquier momento desde los ajustes de tu navegador web.</p>
-        </div>
-    </div>
+    <div id="modal-aviso" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal()">&times;</span><h2>Aviso Legal</h2><p>Titular: Eloy Murillo Granado. Contacto: emurillogranado@gmail.com. El contenido es puramente informativo.</p></div></div>
+    <div id="modal-privacidad" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal()">&times;</span><h2>Privacidad</h2><p>No almacenamos datos personales. Los cálculos son locales en tu navegador.</p></div></div>
+    <div id="modal-cookies" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal()">&times;</span><h2>Cookies</h2><p>Usamos Google AdSense para monetizar. Puedes desactivar cookies en tu navegador.</p></div></div>
 
     <script>
-        // LIBRERÍA DE TEXTOS ALEATORIOS
         const biblioteca = {
             facil: [
                 { t: "El gato Félix era muy perezoso. Dormía todo el día al sol y solo se levantaba para comer. Sus amigos los pájaros se reían de él porque nunca podía alcanzarlos.", q: "¿Qué hacía Félix todo el día?", o: ["Cazar", "Dormir", "Correr"], a: 1 },
-                { t: "La pequeña Ana plantó una semilla en su jardín. Cada mañana la regaba con mucha paciencia hasta que un día brotó una hermosa flor de color azul cielo.", q: "¿De qué color era la flor?", o: ["Roja", "Azul", "Amarilla"], a: 1 },
-                { t: "Un barco de papel navegaba por el charco después de la lluvia. Los niños lo miraban con alegría mientras el viento lo empujaba hacia el otro lado.", q: "¿De qué era el barco?", o: ["Madera", "Papel", "Plástico"], a: 1 }
+                { t: "La pequeña Ana plantó una semilla en su jardín. Cada mañana la regaba con mucha paciencia hasta que un día brotó una hermosa flor de color azul cielo.", q: "¿De qué color era la flor?", o: ["Roja", "Azul", "Amarilla"], a: 1 }
             ],
             medio: [
-                { t: "El telescopio James Webb ha enviado imágenes sorprendentes del universo profundo. Estas capturas permiten a los científicos entender cómo se formaron las primeras galaxias hace miles de millones de años.", q: "¿Qué permiten entender las imágenes?", o: ["La vida en Marte", "Formación de galaxias", "El clima terrestre"], a: 1 },
-                { t: "La dieta mediterránea es reconocida mundialmente por sus beneficios para el corazón. El uso de aceite de oliva, frutas frescas y pescado azul ayuda a reducir el colesterol de manera natural.", q: "¿Qué alimento se menciona para el corazón?", o: ["Mantequilla", "Pescado azul", "Carne roja"], a: 1 },
-                { t: "El teletrabajo ha cambiado la estructura de las ciudades. Muchas personas están dejando los centros urbanos para vivir en zonas rurales, buscando una mejor calidad de vida y aire puro.", q: "¿A dónde se está mudando la gente?", o: ["A las capitales", "A zonas rurales", "A otros países"], a: 1 }
+                { t: "El telescopio James Webb ha enviado imágenes del universo profundo. Estas capturas permiten entender cómo se formaron las galaxias hace miles de millones de años.", q: "¿Qué permiten entender las imágenes?", o: ["Vida en Marte", "Formación de galaxias", "El clima"], a: 1 },
+                { t: "El teletrabajo ha cambiado las ciudades. Muchas personas dejan los centros urbanos para vivir en zonas rurales, buscando aire puro.", q: "¿A dónde se muda la gente?", o: ["A capitales", "A zonas rurales", "A otros países"], a: 1 }
             ],
             dificil: [
-                { t: "La entropía es una magnitud física que mide el grado de desorden de un sistema termodinámico. Según la segunda ley de la termodinámica, la entropía del universo tiende a aumentar con el tiempo.", q: "¿Qué mide la entropía?", o: ["La temperatura", "El desorden", "La gravedad"], a: 1 },
-                { t: "El existencialismo de Jean-Paul Sartre postula que la existencia precede a la esencia. Esto significa que el ser humano comienza por existir y es después cuando se define mediante sus actos.", q: "¿Qué precede a la esencia según Sartre?", o: ["La idea", "La existencia", "La moral"], a: 1 },
-                { t: "La inflación subyacente es un indicador que excluye los precios de la energía y los alimentos no elaborados, permitiendo analizar la tendencia de los precios de forma más estable y precisa.", q: "¿Qué excluye la inflación subyacente?", o: ["Los sueldos", "Energía y alimentos", "Vivienda"], a: 1 }
+                { t: "La entropía mide el grado de desorden de un sistema termodinámico. Según la segunda ley de la termodinámica, la entropía del universo tiende a aumentar.", q: "¿Qué mide la entropía?", o: ["Temperatura", "Desorden", "Gravedad"], a: 1 },
+                { t: "La inflación subyacente es un indicador que excluye los precios de la energía y alimentos no elaborados, permitiendo analizar la tendencia real.", q: "¿Qué excluye?", o: ["Sueldos", "Energía y alimentos", "Vivienda"], a: 1 }
             ]
         };
 
@@ -186,11 +172,9 @@
             const lista = biblioteca[nivel];
             currentData = lista[Math.floor(Math.random() * lista.length)]; 
             document.getElementById('text-content').innerText = currentData.t;
-            
             let quizHTML = `<h3 style="margin-bottom: 15px;">${currentData.q}</h3>` + currentData.o.map((opt, i) => 
-                `<label class="option-label"><input type="radio" name="quiz" value="${i}" style="margin-right: 10px; transform: scale(1.2);"> ${opt}</label>`).join('');
+                `<label class="option-label"><input type="radio" name="quiz" value="${i}" style="margin-right: 10px;"> ${opt}</label>`).join('');
             document.getElementById('quiz-content').innerHTML = quizHTML;
-            
             switchScreen('screen-reading');
             startTime = new Date().getTime();
         }
@@ -202,27 +186,42 @@
 
         function calculateResults() {
             const sel = document.querySelector('input[name="quiz"]:checked');
-            if(!sel) return alert("Por favor, selecciona una respuesta antes de continuar.");
+            if(!sel) return alert("Elige una respuesta.");
             
             let score = parseInt(sel.value) === currentData.a ? 100 : 0;
             let words = currentData.t.split(/\s+/).length;
             let wpm = Math.round((words / timeInSec) * 60);
             
-            // Penalización por no comprender el texto
             if(score === 0) wpm = Math.round(wpm * 0.2); 
 
             document.getElementById('res-wpm').innerText = wpm;
             document.getElementById('res-score').innerText = score + "%";
             
             if(score === 100) {
-                document.getElementById('rank-title').innerText = wpm > 250 ? "¡Eres un Lector Ninja! ⚡" : "¡Excelente comprensión! 🧠";
+                document.getElementById('rank-title').innerText = wpm > 250 ? "¡Nivel Lector Ninja! ⚡" : "¡Muy buena comprensión! 🧠";
                 document.getElementById('res-score').style.color = "var(--accent)";
+                saveBest(wpm);
             } else {
-                document.getElementById('rank-title').innerText = "Demasiado rápido... 🐢";
-                document.getElementById('res-score').style.color = "#ef4444"; // Color rojo para error
+                document.getElementById('rank-title').innerText = "Vuelve a intentarlo... 🐢";
+                document.getElementById('res-score').style.color = "#ef4444";
             }
-            
             switchScreen('screen-results');
+        }
+
+        function saveBest(n) {
+            let best = localStorage.getItem('best_wpm') || 0;
+            if(n > best) {
+                localStorage.setItem('best_wpm', n);
+                showBest();
+            }
+        }
+
+        function showBest() {
+            let best = localStorage.getItem('best_wpm');
+            if(best) {
+                document.getElementById('personal-record').style.display = 'inline-block';
+                document.getElementById('best-wpm').innerText = best;
+            }
         }
 
         function switchScreen(id) { 
@@ -231,28 +230,14 @@
             window.scrollTo(0,0);
         }
 
-        // CONTROL DE MODALES
         function showModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
-        
-        // Cerrar modal al hacer clic fuera del contenido
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                closeModal();
-            }
-        }
-
-        // CONTROL DE COOKIES
-        function acceptCookies() { 
-            localStorage.setItem('lecturapro_cookies', '1'); 
-            document.getElementById('cookie-banner').style.display = 'none'; 
-        }
+        function acceptCookies() { localStorage.setItem('lecturapro_cookies', '1'); document.getElementById('cookie-banner').style.display = 'none'; }
         
         window.onload = function() {
+            showBest();
             if(!localStorage.getItem('lecturapro_cookies')) {
-                setTimeout(() => {
-                    document.getElementById('cookie-banner').style.display = 'block';
-                }, 1500); // Aparece suavemente al segundo y medio
+                setTimeout(() => { document.getElementById('cookie-banner').style.display = 'block'; }, 1000);
             }
         }
     </script>
