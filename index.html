@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3294385200593965" crossorigin="anonymous"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LecturaPro | Test de Velocidad y Comprensión Lectora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --primary: #4f46e5; --primary-hover: #4338ca; 
+            --bg: #f8fafc; --text-main: #0f172a; --card-bg: #ffffff; 
+            --accent: #10b981; --border: #e2e8f0;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root { 
+                --bg: #0f172a; --text-main: #f8fafc; --card-bg: #1e293b; 
+                --primary: #6366f1; --border: #334155;
+            }
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
+        
+        .header { text-align: center; margin-bottom: 40px; margin-top: 20px; }
+        .header h1 { font-size: 2.8rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+        .header p { opacity: 0.8; font-size: 1.1rem; }
+
+        .container { background: var(--card-bg); max-width: 800px; width: 100%; padding: 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); text-align: center; border: 1px solid var(--border); transition: 0.3s; }
+
+        /* PANTALLAS */
+        .screen { display: none; animation: fadeIn 0.4s ease; }
+        .screen.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* BOTONES Y SELECTORES */
+        .level-selector { display: flex; gap: 15px; justify-content: center; margin: 30px 0; flex-wrap: wrap; }
+        .btn { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
+        .btn-success { background: var(--accent); }
+        
+        /* ÁREA DE LECTURA */
+        .reading-area { font-family: 'Lora', serif; font-size: 1.25rem; text-align: left; background: var(--bg); padding: 30px; border-radius: 16px; margin: 20px 0; line-height: 1.8; border-left: 5px solid var(--primary); }
+        
+        /* QUIZ */
+        .quiz-question { margin-bottom: 25px; text-align: left; }
+        .quiz-question h3 { margin-bottom: 15px; font-size: 1.2rem; }
+        .option-label { display: block; background: var(--bg); padding: 15px; border-radius: 10px; margin-bottom: 10px; cursor: pointer; border: 1px solid var(--border); transition: 0.2s; }
+        .option-label:hover { border-color: var(--primary); }
+        .option-label input { margin-right: 10px; accent-color: var(--primary); }
+
+        /* RESULTADOS */
+        .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .result-card { background: var(--bg); padding: 25px; border-radius: 16px; border: 1px solid var(--border); }
+        .result-value { font-size: 3.5rem; font-weight: 800; color: var(--primary); line-height: 1; margin: 10px 0; }
+        .rank-badge { display: inline-block; padding: 8px 16px; border-radius: 30px; font-weight: bold; background: #fef08a; color: #854d0e; margin-bottom: 20px; }
+
+        /* MONETIZACIÓN */
+        .promo-box { background: linear-gradient(135deg, rgba(79,70,229,0.1), rgba(16,185,129,0.1)); border: 2px dashed var(--primary); padding: 25px; border-radius: 16px; margin-top: 30px; }
+        .promo-box a { color: var(--primary); font-weight: bold; text-decoration: none; }
+        .promo-box a:hover { text-decoration: underline; }
+
+        footer { margin-top: 50px; font-size: 0.9rem; opacity: 0.6; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>LecturaPro</h1>
+        <p>Mide tu velocidad real y comprensión lectora.</p>
+    </div>
+
+    <div class="container">
+        
+        <div id="screen-start" class="screen active">
+            <h2>Selecciona tu nivel</h2>
+            <p style="margin-top:10px; color:#64748b;">El cronómetro empezará en cuanto veas el texto. Lee a tu ritmo normal para que el test sea preciso.</p>
+            <div class="level-selector">
+                <button class="btn btn-outline" onclick="loadLevel(0)">🟢 Fácil (Cuento)</button>
+                <button class="btn btn-outline" onclick="loadLevel(1)">🟡 Medio (Artículo)</button>
+                <button class="btn btn-outline" onclick="loadLevel(2)">🔴 Difícil (Opositor)</button>
+            </div>
+        </div>
+
+        <div id="screen-reading" class="screen">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
+                <span id="level-badge" style="font-weight:bold; color:var(--primary);"></span>
+                <span style="font-size: 0.9rem; opacity: 0.7;">⏱️ Cronómetro oculto activo</span>
+            </div>
+            <div id="text-content" class="reading-area"></div>
+            <button class="btn btn-success" style="width: 100%;" onclick="finishReading()">¡HE TERMINADO DE LEER!</button>
+        </div>
+
+        <div id="screen-quiz" class="screen">
+            <h2>Test de Comprensión 🧠</h2>
+            <p style="margin-bottom: 20px; opacity:0.8;">Para validar tu velocidad, responde estas 2 preguntas sobre el texto:</p>
+            <div id="quiz-content"></div>
+            <button class="btn" style="width: 100%; margin-top: 20px;" onclick="calculateResults()">VER MIS RESULTADOS</button>
+        </div>
+
+        <div id="screen-results" class="screen">
+            <h2>Tus Resultados Oficiales</h2>
+            <div class="rank-badge" id="rank-title">🏆 Rango</div>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <p style="font-weight:bold; text-transform:uppercase; font-size:0.8rem;">Velocidad</p>
+                    <div class="result-value" id="res-wpm">0</div>
+                    <p>Palabras / Minuto</p>
+                </div>
+                <div class="result-card">
+                    <p style="font-weight:bold; text-transform:uppercase; font-size:0.8rem;">Comprensión</p>
+                    <div class="result-value" id="res-score" style="color:var(--accent);">0%</div>
+                    <p>Aciertos</p>
+                </div>
+            </div>
+
+            <p id="feedback-msg" style="font-size: 1.1rem; margin-bottom: 20px;"></p>
+            
+            <button class="btn btn-outline" onclick="location.reload()">Repetir Test</button>
+
+            <div class="promo-box">
+                <h3>🚀 ¿Quieres duplicar tu velocidad?</h3>
+                <p style="margin: 10px 0;">El 90% de las personas leen sub-vocalizando. Aprende técnicas profesionales de lectura ágil y mejora tu productividad.</p>
+                <a href="https://www.amazon.es/s?k=curso+lectura+rapida&tag=tu-tag-afiliado-21" target="_blank">📚 Ver los mejores libros de Lectura Rápida en Amazon →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 LecturaPro.es | Herramienta desarrollada por Eloy Murillo.</p>
+        <p style="font-size: 0.7rem; margin-top: 5px;">Privacidad: Los cálculos se realizan en tu navegador. No almacenamos tus datos.</p>
+    </footer>
+
+    <script>
+        // BASE DE DATOS DE TEXTOS Y PREGUNTAS
+        const db = [
+            {
+                name: "Nivel Fácil",
+                text: "Había una vez un pequeño zorro llamado Leo que vivía en un frondoso bosque. A diferencia de los demás zorros, a Leo no le gustaba cazar; prefería pasar las tardes observando las mariposas y coleccionando hojas de colores. Un día, mientras buscaba la hoja de arce perfecta, encontró un mapa antiguo escondido bajo una piedra musgosa. El mapa mostraba el camino hacia el Valle de los Ecos, un lugar legendario del que todos los ancianos del bosque hablaban pero que nadie había visto jamás.",
+                q1: "¿Qué le gustaba coleccionar al zorro Leo?",
+                opt1: ["Huesos", "Hojas de colores", "Piedras brillantes"],
+                ans1: 1,
+                q2: "¿Qué encontró escondido bajo una piedra?",
+                opt2: ["Un tesoro", "Una trampa", "Un mapa antiguo"],
+                ans2: 2
+            },
+            {
+                name: "Nivel Medio",
+                text: "La productividad moderna se ha visto drásticamente afectada por la hiperconectividad. Recientes estudios neurológicos sugieren que el cerebro humano tarda una media de 23 minutos en recuperar el nivel de concentración óptimo tras ser interrumpido por una notificación del teléfono móvil. Por este motivo, expertos en psicología del trabajo recomiendan la técnica del 'trabajo profundo', que consiste en aislarse de distracciones digitales durante bloques ininterrumpidos de 90 minutos para maximizar la eficiencia y reducir la fatiga mental severa.",
+                q1: "¿Cuánto tarda el cerebro en recuperar la concentración tras una interrupción?",
+                opt1: ["10 minutos", "23 minutos", "45 minutos"],
+                ans1: 1,
+                q2: "¿Cuánto debe durar un bloque de 'trabajo profundo' según el texto?",
+                opt2: ["90 minutos", "60 minutos", "120 minutos"],
+                ans2: 0
+            },
+            {
+                name: "Nivel Difícil",
+                text: "El Tribunal Supremo, en su reiterada jurisprudencia respecto a la responsabilidad civil extracontractual contenida en el artículo 1902 del Código Civil, establece que para que exista obligación de resarcir el daño causado, es requisito sine qua non la concurrencia de una acción u omisión culposa o negligente, la producción de un daño real y evaluable, y un nexo causal irrompible entre dicha conducta y el perjuicio ocasionado. La carga de la prueba recae, por norma general, sobre el demandante, salvo en los supuestos de inversión de la carga probatoria por riesgo extraordinario.",
+                q1: "¿Qué artículo del Código Civil se menciona sobre responsabilidad extracontractual?",
+                opt1: ["Artículo 155", "Artículo 1902", "Artículo 1101"],
+                ans1: 1,
+                q2: "¿Sobre quién recae la carga de la prueba por norma general?",
+                opt2: ["Sobre el juez", "Sobre el demandado", "Sobre el demandante"],
+                ans2: 2
+            }
+        ];
+
+        let currentLevel = 0;
+        let wordCount = 0;
+        let startTime = 0;
+        let timeInSeconds = 0;
+
+        function loadLevel(index) {
+            currentLevel = index;
+            const data = db[currentLevel];
+            wordCount = data.text.split(/\s+/).length;
+            
+            document.getElementById('level-badge').innerText = data.name;
+            document.getElementById('text-content').innerText = data.text;
+            
+            // Generar Quiz
+            let quizHTML = `
+                <div class="quiz-question">
+                    <h3>1. ${data.q1}</h3>
+                    ${data.opt1.map((opt, i) => `<label class="option-label"><input type="radio" name="q1" value="${i}"> ${opt}</label>`).join('')}
+                </div>
+                <div class="quiz-question">
+                    <h3>2. ${data.q2}</h3>
+                    ${data.opt2.map((opt, i) => `<label class="option-label"><input type="radio" name="q2" value="${i}"> ${opt}</label>`).join('')}
+                </div>
+            `;
+            document.getElementById('quiz-content').innerHTML = quizHTML;
+
+            switchScreen('screen-reading');
+            startTime = new Date().getTime();
+        }
+
+        function finishReading() {
+            const endTime = new Date().getTime();
+            timeInSeconds = (endTime - startTime) / 1000;
+            switchScreen('screen-quiz');
+        }
+
+        function calculateResults() {
+            const data = db[currentLevel];
+            const ans1 = document.querySelector('input[name="q1"]:checked');
+            const ans2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!ans1 || !ans2) {
+                alert("Por favor, responde ambas preguntas para ver tus resultados.");
+                return;
+            }
+
+            // Calcular Comprensión
+            let score = 0;
+            if (parseInt(ans1.value) === data.ans1) score += 50;
+            if (parseInt(ans2.value) === data.ans2) score += 50;
+
+            // Calcular PPM
+            let wpm = Math.round((wordCount / timeInSeconds) * 60);
+            
+            // Penalización por no comprender
+            if (score === 0) wpm = 0; 
+            else if (score === 50) wpm = Math.round(wpm * 0.7);
+
+            showResults(wpm, score);
+        }
+
+        function showResults(wpm, score) {
+            document.getElementById('res-wpm').innerText = wpm;
+            document.getElementById('res-score').innerText = score + "%";
+
+            let rank = "";
+            let msg = "";
+            let rankColor = "";
+
+            if (score === 0) {
+                rank = "Lectura Nula ❌";
+                msg = "No has entendido el texto. Has leído las palabras pero no has captado el mensaje. ¡Prueba a leer un poco más despacio!";
+                rankColor = "#fca5a5";
+            } else if (wpm < 150) {
+                rank = "Lector Pausado 🐢";
+                msg = "Tu velocidad es baja, pero tu comprensión es buena. Con un poco de técnica podrás volar.";
+                rankColor = "#fcd34d";
+            } else if (wpm < 250) {
+                rank = "Lector Promedio 👤";
+                msg = "Estás dentro de la media mundial. Eres un buen lector, pero tienes margen de mejora.";
+                rankColor = "#bae6fd";
+            } else if (wpm < 400) {
+                rank = "Lector Avanzado 🚀";
+                msg = "¡Fantástico! Lees mucho más rápido que la mayoría conservando la retención de datos.";
+                rankColor = "#6ee7b7";
+            } else {
+                rank = "Genio Literario 👑";
+                msg = "Velocidad y comprensión de élite. Eres una máquina procesando información.";
+                rankColor = "#c4b5fd";
+            }
+
+            const badge = document.getElementById('rank-title');
+            badge.innerText = rank;
+            badge.style.background = rankColor;
+            document.getElementById('feedback-msg').innerText = msg;
+
+            switchScreen('screen-results');
+        }
+
+        function switchScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+    </script>
+</body>
+</html>
